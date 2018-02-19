@@ -1,0 +1,22 @@
+<form [formGroup]="form" fxLayout="column" (ngSubmit)="submit(form)">
+  <h4 mat-dialog-title>Login</h4>
+  <mat-dialog-content fxLayout="column">
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="Email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="password" placeholder="Password">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()" type="button">Aceptar</button>
+    <button mat-button (click)="close()" type="button">Cancelar</button>
+
+
+    <a style="cursor:pointer; text-decoration: underline;     margin-top: 7px;" [routerLink]="['/signup']">
+      Recuperar Contraseña
+    </a>
+
+
+  </mat-dialog-actions>
+</form>

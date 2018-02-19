@@ -1,0 +1,1827 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Código mantenible y de calidad en JavaScript - Modificación de Carlos</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <!-- <link rel="stylesheet" href="css/theme/black.css"> -->
+    <link rel="stylesheet" href="css/theme/night.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai-sublime.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!-- QR Codes -->
+    <script type="text/javascript" src="qrcodejs/qrcode.js"></script>
+
+    <!-- Manual style tweaks -->
+    <style>
+        /* Columns */
+
+        /* ref: https://stackoverflow.com/questions/30861845/how-to-use-two-column-layout-with-reveal-js#answer-44392145 */
+
+        body {
+            background: url(images/fondo.png) no-repeat center center fixed;
+            background-size: cover;
+        }
+
+
+
+        .columns {
+            display: flex;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        .col-author {
+            flex: 0;
+        }
+
+        /* Colours */
+
+        .text-red {
+            color: #f00;
+        }
+
+        .text-green {
+            color: #0f0;
+        }
+
+        .text-yellow {
+            color: #ff0;
+        }
+
+        .text-blue {
+            color: #00f;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4,
+        .reveal h5,
+        .reveal h6 {
+            color: #212121;
+            font-family: 'Open Sans', sans-serif;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, .6);
+        }
+
+        .reveal {
+            color: #424242;
+        }
+
+        .text-primary {
+            color: #009688;
+            font-weight: 900 !important;
+        }
+
+        .reveal section img.no-border {
+            margin: 0px;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        img.author {
+            border-radius: 500px;
+            max-width: 200px;
+            font-weight: bolder;
+        }
+
+        ul.author-desc li {
+            list-style-type: none;
+            padding: 0em 0.8em;
+        }
+
+        /* External Link */
+
+        .prj-link {
+            font-family: monospace !important;
+            font-size: 0.9em !important;
+        }
+
+        code.language-javascript {
+            font-size: 1.3em !important;
+            line-height: 1.25em;
+        }
+
+        .prj-link::before {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            margin-right: 0.1em;
+            margin-left: 0.1em;
+            content: "";
+            background: url("images/micro-sd-card.png") no-repeat 0 0;
+            background-size: 100%;
+            vertical-align: middle;
+        }
+
+        /* QR Code */
+
+        .qrcode {
+            background-color: #fff;
+            padding: 1px 1px 1px 1px;
+            display: inline-block;
+        }
+
+        .half-size {
+            font-size: 0.5em !important;
+        }
+
+        /*         .height-code {
+            height: 2em;
+        } */
+
+        .reveal pre {
+            font-size: 0.35em;
+            margin: 0 auto;
+        }
+
+        .desktop-window .desktop-window-top #circles {
+            text-align: left;
+        }
+
+        .desktop-window {
+            background: #bfbfbf;
+            border: solid #bfbfbf;
+            border-top-width: 10px;
+            border-bottom-width: 4px;
+            border-radius: 10px;
+            margin: auto;
+        }
+
+        #circles {
+            margin-left: 5px;
+            margin-bottom: 5px;
+        }
+
+        .circle {
+            width: 12px;
+            height: 12px;
+            background: black;
+            border-radius: 100%;
+            display: inline-block;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        #c1 {
+            background: #F44336;
+        }
+
+        #c2 {
+            background: #FFEB3B;
+        }
+
+        #c3 {
+            background: #4CAF50;
+        }
+
+        .reveal section img {
+            margin: 15px 0px;
+            background: no-repeat;
+            border: none;
+            box-shadow: none;
+        }
+
+        /* Sections */
+
+        .title {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+
+        .title h1 {
+            font-size: 6rem;
+        }
+
+        .title div:nth-child(2) {
+            display: flex;
+        }
+
+        .title img {
+            margin: 0 !important;
+        }
+
+        #cartel {
+            width: 100%;
+            height: 100%;
+        }
+
+        #cartel section {
+            width: 100%;
+            height: 100%;
+            background: url(images/cartel.png);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section id="cartel">
+                <section>
+
+                </section>
+            </section>
+            <!-- =================== INTRODUCTION =================== -->
+            <section>
+                <section>
+                    <h3>Clean Code applied to JavaScript</h3>
+
+                    <div class="stretch">
+                        <div class="stretch">
+                            <div class="columns">
+                                <div class="col">
+                                    <div class="columns" style="font-size:0.7em">
+                                        <div class="col-author">
+                                            <img class="no-border author" src="images/authors/CarlosCaballero.jpg">
+                                        </div>
+                                        <div class="col">
+                                            <ul class="author-desc text-primary">
+                                                <li>PhD. Computer Science</li>
+                                                <li>Computer Science Teacher</li>
+                                                <li>Book Writer</li>
+                                                <li>Linkedin:
+                                                    <a href="https://www.linkedin.com/in/carloscaballerogonzalez/">https://www.linkedin.com/in/carloscaballerogonzalez/</a>
+                                                </li>
+                                                <li>Twitter:
+                                                    <a href="https://twitter.com/Carlillo">https://twitter.com/Carlillo</a>
+                                                </li>
+                                                <li>Github:
+                                                    <a href="https://github.com/Caballerog">https://github.com/Caballerog</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div style="text-align:left">
+                                        <a href="https://www.twitter.com/carlillo">Carlos Caballero</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="sretch">
+                            <img class="no-border" src="images/logo/javascript.png">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section>
+                    <h2>Contents</h2>
+                    <div class="columns">
+                        <div class="col">
+                            <div class="qrcode" align="center"></div>
+                            <div class="half-size">
+                                <a class="qrcode-link"></a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <ul style="font-size:0.85em">
+                                <li>
+                                    <a href="#/introduction">Introduction</a>
+                                </li>
+
+
+                                <li>
+                                    <a href="#/what">Clean code applied to JS</a>
+                                </li>
+                                <ul>
+                                    <li>
+                                        <a href="#/before">Before you start programming</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/variables">Variables</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/functions">Functions</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/exceptions">Exceptions</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/conditionals">Avoid conditionals complexity</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/async">Async</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/test">Test</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/xp">eXtreme Programming: XP</a>
+                                    </li>
+
+
+                                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- =================== WHAT IS MICROPYTHON =================== -->
+            <section id="introduction">
+                <!--                 <section class="title">
+                    <div>
+                        <h1>Introduction</h1>
+                    </div>
+                    <div>
+                        <img src="images/indice.svg">
+                    </div>
+                </section> -->
+
+                <section>
+                    <h2>Code smell and refactoring - I </h2>
+                    <blockquote style="width:85%">
+                        &ldquo;A
+                        <span class="text-primary">code smell </span> is a surface indication that usually corresponds to a deeper problem in the system.&rdquo;
+                        Martin Fowler
+                    </blockquote>
+                    <blockquote style="width:85%">
+                        &ldquo;Bad code smells can be an indicator of factors that contribute to
+                        <span class="text-primary"></span class="text-primary">technical debt</span>.&rdquo; Robert C. Martin
+                    </blockquote>
+                    <blockquote style="width:85%">
+                        &ldquo; Technical debt is a concept in software development that
+                        <span class="text-primary">reflects the implied cost of additional rework </span> caused by choosing an easy solution now instead
+                        of using a better approach that would take longer.&rdquo;
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Code smell and refactoring - II</h2>
+                    <ul style="font-size:0.8em">
+                        <li> Code refactoring is the process of restructuring existing computer code
+                            <span class="text-primary">
+                                without changing its external behavior
+                            </span>. </li>
+                        <ul>
+                            <li> Refactoring
+                                <span class="text-primary">improves nonfunctional attributes </span>of the software.</li>
+                            <li> Advantages include
+                                <span class="text-primary">improved code readability and reduced complexity</span>. </li>
+                            <li> These can improve
+                                <span class="text-primary">source-code maintainability</span>.</li>
+                            <li> Create a more expressive internal architecture to improve
+                                <span class="text-primary">extensibility </span>. </li>
+
+                        </ul>
+                    </ul>
+                    <img class="plain" src="images/00-refactoring.jpg" width="40%" />
+                </section>
+            </section>
+
+            <section id="before" data-background="images/fondos/fondo-before.png">
+                <section>
+                    <div class="title">
+                        <div>
+                            <h2>Before you start programming</h2>
+                        </div>
+                        <div>
+                            <img src="images/intro.svg" />
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Readable for humans - I</h3>
+                    <pre>
+                        <code class="language-javascript" style="font-size:1.2em" data-trim contenteditable>
+const users = [
+  {
+    id: 1,
+    name: "Carlos Caballero",
+    memberSince: "1997-04-20",
+    favoriteLanguageProgramming: ["JavaScript", "C", "Java"],
+  },
+  {
+    id: 2,
+    name: "Antonio Villena",
+    memberSince: "2014-08-15",
+    favoriteLanguageProgramming: ["Go", "Python", "JavaScript"],
+  },
+  {
+    id: 3,
+    name: "Jesús Segado",
+    memberSince: "2015-03-15",
+    favoriteLanguageProgramming: ["PHP", "JAVA", "JavaScript"],
+  }
+];
+                        </code>
+                    </pre>
+
+                    <div class="fragment fade-in height-code">
+                        <pre>
+                        <code class="language-javascript" style="font-size:1.2em" data-trim contenteditable>
+    const users = [
+    { id: 1, name: "Carlos Caballero", memberSince: "1997-04-20", favoriteLanguageProgramming: ["JavaScript", "C", "Java"] },
+    { id: 2, name: "Antonio Villena", memberSince: "2014-08-15", favoriteLanguageProgramming: ["Go", "Python", "JavaScript"] },
+    { id: 3, name: "Jesús Segado", memberSice: "2015-03-15", favoriteLanguageProgramming: ["PHP", "JAVA", "JavaScript"] },
+    ];
+                            </code>
+                        </pre>
+                    </div>
+
+                    <div class="fragment fade-in height-code">
+                        <pre>
+                            <code class="language-javascript" style="font-size:1.2em" data-trim contenteditable>
+        const users = [{ id: 1, name: "Carlos Caballero", memberSince: "1997-04-20", favoriteLanguageProgramming: ["JavaScript", "C", "Java"] }, { id: 2, name: "Antonio Villena", memberSince: "2014-08-15", favoriteLanguageProgramming: ["Go", "Python", "JavaScript"] }, { id: 3, name: "Jesús Segado", memberSice: "2015-03-15", favoriteLanguageProgramming: ["PHP", "JAVA", "JavaScript"] } ];
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+                <section>
+                    <h3>Develop in English</h3>
+                    <div class="columns">
+                        <div class="col">
+                            <pre>
+                            <code class="language-javascript" data-trim contenteditable>
+const benutzer = {
+    id: 1,
+    name: "John Smith",
+    mitgliedVon: "1997-04-20",
+};
+Gehaltserhöhung(benutzer, 1000);
+                            </code>
+                        </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in">
+            <code class="language-javascript" data-trim contenteditable>
+const użytkownik = {
+    id: 1,
+    imię: "John Smith",
+    członekZ: "1997-04-20",
+};
+wzrostWynagrodzeń(benutzer, 1000);
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <pre class="fragment fade-in">
+                                <code class="language-javascript" data-trim contenteditable>
+                const user = {
+                    id: 1,
+                    name: "John Smith",
+                    memberSince: "1997-04-20",
+                };
+                increaseSalary(user, 1000);
+                                </code>
+                            </pre>
+                </section>
+                <section>
+                    <h3>Teamwork - I</h3>
+                    <ul>
+                        <li>.editorconfig: helps developers define and maintain consistent coding styles between different editors
+                            and IDEs. </li>
+                    </ul>
+                    <div class="columns">
+                        <div class="col">
+                            <pre>
+                        <code class="language-javascript" data-trim contenteditable>
+                                root = true
+                                
+                                [*]
+                                end_of_line = lf
+                                insert_final_newline = true
+                                
+                                [*.{js,py}]
+                                charset = utf-8
+                                
+                                [*.py]
+                                indent_style = space
+                                indent_size = 4
+                        </code>
+                    </pre>
+                        </div>
+                        <div class="col">
+                            <pre>
+                            <code class="language-javascript" data-trim contenteditable>
+                                    [Makefile]
+                                    indent_style = tab
+                                    
+                                    [*.js]
+                                    indent_style = space
+                                    indent_size = 2
+                                    
+                                    [{package.json,.travis.yml}]
+                                    indent_style = space
+                                    indent_size = 2
+                                    </code>
+                              </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Teamwork - II</h3>
+                    <ul>
+                        <li>
+                            <span class="primary-text">Lint </span> as a term can also refer more broadly to syntactic discrepancies in general, especially
+                            in interpreted languages like JavaScript and Python. </li>
+                    </ul>
+                    <div class="columns">
+                        <div class="col">
+                            <pre>
+                            <code class="language-javascript" data-trim contenteditable>
+                                    {
+                                        "globals": {
+                                            "myModule": true
+                                        },
+                                        "env": {
+                                            "browser": true
+                                        },
+                                        "rules": {
+                                            "no-unused-vars": "error",
+                                            "quotes": ["warning", "double"]
+                                        }
+                                    }
+                            </code>
+                        </pre>
+                        </div>
+                        <div class="col">
+                            <pre>
+                                <code class="language-javascript" data-trim contenteditable>
+                                        const a = 'a';
+                                        const b = a;
+                                        const c = b;
+                                        </code>
+                                  </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Teamwork - III</h3>
+                    <div class="columns">
+                        <div class="col">
+                            <ul>JavaScript Style Guide():
+                                <li> Standard JavaScript Style Guide.</li>
+                                <li> Google JavaScript Style Guide. </li>
+                                <li> Airbnb JavaScript Style Guide. </li>
+                                <ul>
+                                    <li>2/4 spaces or tabs – for indentation</li>
+                                    <li>Single or doubles quotes for strings</li>
+                                    <li>No semicolons or semicolons</li>
+                                    <li>Never start a line with (, [, or `</li>
+                                </ul>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <img src="images/prettier.gif">
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+            <section id="variables" data-background="images/fondos/fondo-variables.png">
+                <section>
+                    <div class="title">
+                        <div>
+                            <h1>Variables</h1>
+                        </div>
+                        <div>
+                            <img src="images/variables.svg" />
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Use meaningful and pronounceable variable names - I</h3>
+                    <small>Use intention revealing names</small>
+                    <pre class="height-code">
+                    <code class="language-javascript" data-trim contenteditable>
+                                const d; 
+                        </code>
+                    </pre>
+                    <pre class="fragment fade-in height-code">
+                            <code class="language-javascript" data-trim contenteditable>
+                                    const d; // elapsed time in days
+                                </code>
+                            </pre>
+                    <pre class="fragment fade-in height-code">
+                        <code class="language-javascript" data-trim contenteditable>
+                            const elapseTimeInDays;
+                        </code>
+                    </pre>
+
+                    <small class="fragment fade-in">Use pronounceable names</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="fragment fade-in">
+                                <code class="language-javascript" data-trim contenteditable>
+                                        class DtaRcrd102 {
+                                            private Date genymdhms;
+                                            private Date modymdhms;
+                                        }
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                <code class="language-javascript" data-trim contenteditable>
+                                        class Customer {
+                                            private Date generationTimestamp;
+                                            private Date modificationTimestamp;
+                                        }
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Use meaningful and pronounceable variable names - II</h3>
+                    <small>Don't use the variable's type in the name</small>
+                    <pre class="">
+                        <code class="language-javascript" data-trim contenteditable>
+                                const aCountries = [] 
+                                const sName = ''
+                                const dAmount = 3.2;
+                            </code>
+                        </pre>
+
+                    <small>Use the same vocabulary for the same type of variable</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                <code class="language-javascript" data-trim contenteditable>
+                                        getUserInfo();
+                                        getClientData();
+                                        getCustomerRecord();
+                                    </code>
+                             </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+                                <code class="language-javascript" data-trim contenteditable>
+                                        getUser();
+                                    </code>
+                                </pre>
+                        </div>
+                    </div>
+
+                </section>
+                <section>
+                    <h3>Use meaningful and pronounceable variable names - III</h3>
+                    <small>Don't add unneeded context</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre>
+                                        <code class="language-javascript" data-trim contenteditable>
+                                                const Car = {
+                                                    carMake: 'Honda',
+                                                    carModel: 'Accord',
+                                                    carColor: 'Blue'
+                                                  };
+                                                  
+                                                  function paintCar(car) {
+                                                    car.carColor = 'Red';
+                                                  }
+                                        </code>
+                                    </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                        <code class="language-javascript" data-trim contenteditable>
+                                                const Car = {
+                                                    make: 'Honda',
+                                                    model: 'Accord',
+                                                    color: 'Blue'
+                                                  };
+                                                  
+                                                  function paint(car) {
+                                                    car.color = 'Red';
+                                                  }
+                                        </code>
+                                    </pre>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section>
+                    <h3>Use meaningful and pronounceable variable names - IV</h3>
+                    <small>Don't use magic number and strings</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre>
+                                            <code class="language-javascript" data-trim contenteditable>
+                                                    // What the heck is 86400000 for?
+                                                    setTimeout(blastOff, 86400000);
+
+                                                    user.rol = "Administrator";
+                                            </code>
+                                        </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                    <code class="language-javascript" data-trim contenteditable>
+                                            const MILLISECONDS_IN_A_DAY = 86400000;
+                                            const ADMINISTRATOR_ROL = "Administrator";
+
+                                            setTimeout(blastOff, MILLISECONDS_IN_A_DAY);
+
+                                            user.rol = ADMINISTRATOR_ROL;
+                                    </code>
+                                </pre>
+
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+            <section id="functions" data-background="images/fondos/fondo-functions.png">
+                <section>
+                    <div class="title">
+                        <div>
+                            <h1>Functions</h1>
+                        </div>
+                        <div>
+                            <img src="images/funciones.svg" />
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Fuctions - I</h3>
+                    <small>Use default arguments instead of short circuiting or conditionals</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                            <code class="language-javascript" data-trim contenteditable>
+                                    function setName(name) {
+                                        const newName = name || 'Juan Palomo';
+                                    }
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                        <code class="language-javascript" data-trim contenteditable>
+                                                function setName(name  = 'Juan Palomo') {
+                                                    // ...
+                                                }
+                                            </code>
+                                        </pre>
+                        </div>
+                    </div>
+                    <small>Function arguments (2 or fewer ideally)</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                    <code class="language-javascript" data-trim contenteditable>
+        function newBurger(name, price, ingredients, vegan) {
+            // ...
+        }
+                                    </code>
+                                 </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                    <code class="language-javascript" data-trim contenteditable>
+function newBurger({ name, price, ingredients, vegan }) {
+    // ...
+} 
+newBurger({
+    name: 'Chicken',
+    price: 1.25,
+    ingredients: ['chicken'],
+    vegan: false,
+});
+                                        </code>
+                                    </pre>
+                        </div>
+                    </div>
+
+                </section>
+                <section>
+                    <h3>Fuctions - II</h3>
+                    <small>Avoid Side Effects - Global variables</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                <code class="language-javascript" data-trim contenteditable>
+            let fruits = 'Banana Apple';
+            
+            function splitFruits() {
+                fruits = fruits.split(' ');
+            }
+            
+            splitFruits();
+            
+            console.log(fruits); // ['Banana', 'Apple'];
+                                    </code>
+                                </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                            <code class="language-javascript" data-trim contenteditable>
+    function splitFruits(fruits) {
+        return fruits.split(' ');
+    }
+        
+    const fruits = 'Banana Apple';
+    const newFruits = splitFruits(fruits);
+        
+    console.log(fruits); // 'Banana Apple';
+    console.log(newFruits); // ['Banana', 'Apple'];
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <small>Avoid Side Effects - Objects Mutables</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                        <code class="language-javascript" data-trim contenteditable>
+    const addItemToCart = (cart, item) => {
+        cart.push({ item, date: Date.now() });
+    };                                                  
+                                            </code>
+                                     </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                        <code class="language-javascript" data-trim contenteditable>
+    const addItemToCart = (cart, item) => {
+        return [...cart, {
+                    item, 
+                    date: Date.now(),
+                }];
+    };
+                                            </code>
+                                        </pre>
+                        </div>
+                    </div>
+
+                </section>
+                <section>
+                    <h3>Fuctions - III</h3>
+                    <small>Functions should do one thing</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                    <code class="language-javascript" data-trim contenteditable>
+    function emailCustomers(customers) {
+        customers.forEach((customer) => {
+            const customerRecord = database.find(customer);
+            if (customerRecord.isActive()) {
+                email(client);
+            }
+        });
+    }
+                                        </code>
+                                    </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                                <code class="language-javascript" data-trim contenteditable>
+        function emailActiveCustomers(customers) {
+            customers
+                .filter(isActiveCustomer)
+                .forEach(email);
+            }
+            
+        function isActiveCustomer(customer) {
+            const customerRecord = database.find(customer);
+            return customerRecord.isActive();
+        }
+                                                    </code>
+                                                </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Fuctions - IV</h3>
+                    <small>Functions should only be one level of abstraction</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                    <code class="language-javascript" data-trim contenteditable>
+function parseBetterJSAlternative(code) {
+    const REGEXES = [
+        // ...
+    ];
+    
+    const statements = code.split(' ');
+    const tokens = [];
+    REGEXES.forEach((REGEX) => {
+        statements.forEach((statement) => {
+        // ...
+        });
+    });
+    
+    const ast = [];
+    tokens.forEach((token) => {
+        // lex...
+    });
+    
+    ast.forEach((node) => {
+        // parse...
+    });
+}                                                
+                                        </code>
+                                    </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+                            <code class="language-javascript" data-trim contenteditable>
+const REGEXES = [ // ...];
+function tokenize(code) {    
+    const statements = code.split(' ');
+    const tokens = [];
+    REGEXES.forEach((REGEX) => {
+        statements.forEach((statement) => {
+            tokens.push( /* ... */ );
+        });
+    });
+    return tokens;
+}
+function lexer(tokens) {
+    const ast = [];
+    tokens.forEach((token) => ast.push( /* */ ));
+    return ast;
+}
+function parseBetterJSAlternative(code) {
+    const tokens = tokenize(code);
+    const ast = lexer(tokens);
+    ast.forEach((node) => // parse...);
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+
+                </section>
+                <section>
+                    <h3>Fuctions - V</h3>
+                    <small>Favor functional programming over imperative programming</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                                <code class="language-javascript" data-trim contenteditable>
+const items = [{
+    name: 'Coffe',
+    price: 500
+  }, {
+    name: 'Ham',
+    price: 1500
+  }, {
+    name: 'Bread',
+    price: 150
+  }, {
+    name: 'Donuts',
+    price: 1000
+  }
+];
+
+let total = 0;
+for (let i = 0; i < items.length; i++) {
+  total += items[i].price;
+}
+                                                    </code>
+                                                </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+                                                            <code class="language-javascript" data-trim contenteditable>
+const items = [{
+    name: 'Coffe',
+    price: 500
+  }, {
+    name: 'Ham',
+    price: 1500
+  }, {
+    name: 'Bread',
+    price: 150
+  }, {
+    name: 'Donuts',
+    price: 1000
+  }
+];
+
+const total = items
+  .map(output => output.price)
+  .reduce((total, price) => total + price);
+                                                                </code>
+                                                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Fuctions - VI</h3>
+                    <small>Use method chaining</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre>
+                                                    <code class="language-javascript" data-trim contenteditable>
+    class Car {
+        constructor({ make, model, color } = car) {
+            /* */
+        }
+        setMake(make) {
+            this.make = make;
+        }
+        setModel(model) {
+            this.model = model;
+        }
+        setColor(color) {
+            this.color = color;
+        }
+        save() {
+            console.log(this.make, this.model, this.color);
+        }
+    }    
+    const car = new Car('WV','Jetta','gray');
+    car.setColor('red');
+    car.save();
+                                                    </code>
+                                                    </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+                                                                <code class="language-javascript" data-trim contenteditable>
+class Car {
+    constructor({ make, model, color } = car){}
+    setMake(make) {
+        this.make = make;
+        return this;
+    }
+    setModel(model) {
+        this.model = model;
+        return this;
+    }
+    setColor(color) {
+        this.color = color;
+        return this;
+    }
+    save() {
+        console.log(this.make, this.model, this.color);
+        return this;
+    }
+}
+const car = new Car('WV','Jetta','gray')
+.setColor('red')
+.save();
+                                                                    </code>
+                                                                </pre>
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+
+
+            <section id="exceptions" data-background="images/fondos/fondo-exceptions.png">
+                <section>
+                    <div class="title">
+                        <div>
+                            <h1>Exceptions</h1>
+                        </div>
+                        <div>
+                            <img src="images/exception.svg" />
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Exceptions - I </h3>
+                    <small>Don't ignore caught errors</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                    <code class="language-javascript" data-trim contenteditable>
+try {
+    functionThatMightThrow();
+} catch (error) {
+    console.log(error);
+}
+                                    </code>
+                                </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+                                    <code class="language-javascript" data-trim contenteditable>
+try {
+    functionThatMightThrow();
+} catch (error) {
+    console.error(error);
+    notifyUserOfError(error);
+    reportErrorToService(error);
+}
+                                                                                    </code>
+                                                                                </pre>
+                        </div>
+                    </div>
+
+                    <small>Don't ignore rejected promises</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                <code class="language-javascript" data-trim contenteditable>
+getdata()
+.then((data) => functionThatMightThrow(data))
+.catch((error) => {
+    console.log(error);
+});
+                                                                        </code>
+                                                                    </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+                                        <code class="language-javascript" data-trim contenteditable>
+    getdata()
+    .then((data) => functionThatMightThrow(data))
+    .catch((error) => {
+        console.error(error);
+        notifyUserOfError(error);
+        reportErrorToService(error);
+    });
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section>
+                    <h3>Fuctions - III</h3>
+                    <small>Functions should do one thing</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                    <code class="language-javascript" data-trim contenteditable>
+    function emailCustomers(customers) {
+        customers.forEach((customer) => {
+            const customerRecord = database.find(customer);
+            if (customerRecord.isActive()) {
+                email(client);
+            }
+        });
+    }
+                                        </code>
+                                    </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                                <code class="language-javascript" data-trim contenteditable>
+        function emailActiveCustomers(customers) {
+            customers
+                .filter(isActiveCustomer)
+                .forEach(email);
+            }
+            
+        function isActiveCustomer(customer) {
+            const customerRecord = database.find(customer);
+            return customerRecord.isActive();
+        }
+                                                    </code>
+                                                </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Exceptions - II </h3>
+                    <small>Exceptions Hierarchy</small>
+
+                    <pre class="fragment fade-in ">
+                                    <code class="language-javascript" data-trim contenteditable>
+    export class UserException extends Error {
+        constructor(message) {
+            super(`User:  ${message}`);
+        }
+    }
+    export class AdminException extends Error {
+        constructor(message) {
+            super(`Admin:  ${message}`);
+        }
+    }
+    //...
+    const id = 1;
+    const user = this.users.find({id});
+    if(user){
+        throw new UserException("This user already exists");
+    }
+                                    </code>
+                                </pre>
+                </section>
+
+            </section>
+
+            <!-- =================== GETTING STARTED =================== -->
+            <section id="conditionals" data-background="images/fondos/fondo-conditionals.png">
+                <section>
+                    <div class="title">
+                        <div>
+                            <h2>Avoid conditionals complexity</h2>
+                        </div>
+                        <div>
+                            <img src="images/avoid.svg" />
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Avoid conditionals complexity - I </h3>
+                    <small>Don't use flags as function parameters</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                                <code class="language-javascript" data-trim contenteditable>
+function book(customer, isPremium) {
+    // ...
+    if(isPremium){
+        premiumLogic();
+    }else{
+        regularLogic();
+    }
+}                               </code>
+                                                </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in height-code">
+                                                            <code class="language-javascript" data-trim contenteditable>
+function bookPremium (customer){
+    premiumLogic();
+}
+function bookRegular (customer){
+    regularLogic();
+}
+                
+                                                                </code>
+                                                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Avoid conditionals complexity - II </h3>
+                    <small>Encapsulate conditionals</small>
+
+                    <pre class="">
+                                                <code class="language-javascript" data-trim contenteditable>
+if (platform.state === 'fetching' && isEmpty(cart)) {
+    // ...
+}                                              
+                                                    </code>
+                                                </pre>
+
+                    <pre class="fragment fade-in ">
+                                        <code class="language-javascript" data-trim contenteditable>
+function showLoading(platform, cart) {
+    return platform.state === 'fetching' && isEmpty(cart);
+}
+    
+if (showLoading(platform, cart)) {
+    // ...
+}
+                                            </code>
+                                        </pre>
+
+                </section>
+                <section>
+                    <h3>Avoid conditionals complexity - III</h3>
+                    <small>Replace Nested Conditional with Guard Clauses</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                <code class="language-javascript" data-trim contenteditable>
+function getPayAmount() {
+    let result;
+    if (isDead){
+        result = deadAmount();
+    }else {
+        if (isSeparated){
+            result = separatedAmount();
+        } else {
+            if (isRetired){
+                result = retiredAmount();
+            }else{
+                result = normalPayAmount();
+            }
+        }
+    }
+    return result;
+}
+</code>
+                                                                    </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+                                        <code class="language-javascript" data-trim contenteditable>
+function getPayAmount() {
+    if (isDead) return deadAmount();
+    if (isSeparated) return separatedAmount();
+    if (isRetired) return retiredAmount();
+    return normalPayAmount();
+}
+                                    </code>
+                                </pre>
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <section>
+                    <h3>Avoid conditionals complexity - IV</h3>
+                    <small>Remove conditionals using polymorphism</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                                                        <code class="language-javascript" data-trim contenteditable>
+function Auto() {
+}
+Auto.prototype.getProperty = function () {
+    switch (type) {
+        case BIKE:
+            return getBaseProperty();
+        case CAR:
+            return getBaseProperty() - getLoadFactor();
+        case BUS:
+            return (isNailed) ? 
+            0 : 
+            getBaseProperty(voltage);
+    }
+    throw new Exception("Should be unreachable");
+};
+                                                                            </code>
+                                                                        </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+                                            <small>TypeScript</small>
+                                            <code class="language-javascript" data-trim contenteditable>
+abstract class Auto { 
+    abstract getProperty();
+}
+    
+class Bike extends Auto {
+    getProperty() {
+        return getBaseProperty();
+    }
+}
+class Car extends Auto {
+    getProperty() {
+        return getBaseProperty() - getLoadFactor();
+    }
+}
+class Bus extends Auto {
+    getProperty() {
+        return (isNailed) ? 
+                0 : 
+                getBaseProperty(voltage);
+    }
+}
+// Somewhere in client code
+speed = auto.getProperty();
+                                        </code>
+                                    </pre>
+                        </div>
+                    </div>
+
+                </section>
+                <section>
+                    <h3>Avoid conditionals complexity - V</h3>
+                    <small>Remove conditionals using Strategy pattern (composition)/Command pattern</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                                                            <code class="language-javascript" data-trim contenteditable>
+                                                                                 
+function logMessage(message = "CRITICAL::The system ..."){
+    const parts = message.split("::"); 
+    const level = parts[0];
+
+    switch (level) {
+        case 'NOTICE':
+            console.log("Notice")
+            break;
+        case 'CRITICAL':
+            console.log("Critical");
+            break;
+        case 'CATASTROPHE':
+           console.log("Castastrophe");
+            break;
+    }
+}
+                                                                                </code>
+                                                                            </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+            <code class="language-javascript" data-trim contenteditable>
+const strategies = {
+    criticalStrategy,
+    noticeStrategy,
+    catastropheStrategy,
+}
+function logMessage(message = "CRITICAL::The system ...") {
+    const [level, messageLog] = message.split("::");
+    const strategy = `${level.toLowerCase()}Strategy`;
+    const output = strategies[strategy](messageLog);
+}
+function criticalStrategy(param) {
+    console.log("Critical: " + param);
+}
+function noticeStrategy(param) {
+    console.log("Notice: " + param);
+}
+function catastropheStrategy(param) {
+    console.log("Catastrophe: " + param);
+}
+logMessage();
+logMessage("CATASTROPHE:: A big Catastrophe");
+                                            </code>
+                                        </pre>
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+
+            <section id="async" data-background="images/fondos/fondo-async.png">
+                <section>
+                    <div class="title">
+                        <div>
+                            <h1>Async</h1>
+                        </div>
+                        <div>
+                            <img src="images/async.svg" />
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Async - I </h3>
+                    <small>Use Promises, not callbacks</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                                        <code class="language-javascript" data-trim contenteditable>
+import { get } from 'request';
+import { writeFile } from 'fs';
+
+get(API_ENDPOINT, 
+   (requestErr, response) => {
+    if (requestErr) {
+        console.error(requestErr);
+    } else {
+        writeFile(MY_FILE, response.body, 
+            (writeErr) => {
+                if (writeErr) {
+                    console.error(writeErr);
+                } else {
+                    console.log('File written');
+                }
+            });
+        }
+    });
+                                                            </code>
+                                                        </pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in">
+                                <code class="language-javascript" data-trim contenteditable>
+import { get } from 'request';
+import { writeFile } from 'fs';
+
+get(API_ENDPOINT)
+  .then((response) => {
+    return writeFile(MY_FILE, response);
+  })
+  .then(() => {
+    console.log('File written');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+                                                                        </code>
+                                                                    </pre>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section>
+                    <h3>Async - II </h3>
+                    <small>Async/Await are even cleaner than Promises</small>
+                    <div class="columns">
+                        <div class="col">
+                            <pre class="">
+                                                            <code class="language-javascript" data-trim contenteditable>
+import { get } from 'request';
+import { writeFile } from 'fs';
+
+get(API_ENDPOINT)
+    .then((response) => {
+        return writeFile(MY_FILE, response);
+    })
+    .then(() => {
+        console.log('File written');
+    })
+    .catch((err) => {
+        console.error(err);
+    });</code></pre>
+                        </div>
+                        <div class="col">
+                            <pre class="fragment fade-in ">
+                                    <code class="language-javascript" data-trim contenteditable>
+import { get } from 'request-promise';
+import { writeFile } from 'fs-promise';
+
+async function asyncFunction() {
+    try {
+        const response = await get(API_ENDPOING);
+        await writeFile(MY_FILE, response);
+        console.log('File written');
+    } catch(err) {
+        console.error(err);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+
+
+
+            <section id="test" data-background="images/fondos/fondo-testing.png">
+                <section>
+                    <div class="title">
+                        <div>
+                            <h1>Testing</h1>
+                        </div>
+                        <div>
+                            <img src="images/testing.svg" />
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <h3>TDD: Test-Driven Development </h3>
+                        <ul>
+                            <li>You can't write any production code until you have first written a failing unit test.</li>
+                            <li>You can't write more of a unit test than is sufficient to fail, and not compiling is failing.</li>
+                            <li>You can't write more production code than is sufficient to pass the currently failing unit test.</li>
+                        </ul>
+                    </div>
+                    <div class="fragment fade-in">
+                        <h3>FIRST</h3>
+                        <ul>
+                            <li>
+                                <strong>F</strong>ast</li>
+                            <li class="fragment fade-in">
+                                <strong>I</strong>ndependent</li>
+                            <li class="fragment fade-in">
+                                <strong>R</strong>epetition</li>
+                            <li class="fragment fade-in">
+                                <strong>S</strong>elf-Validating</li>
+                            <li class="fragment fade-in">
+                                <strong>T</strong>imely</li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h3>Test Types </h3>
+                    <ul>
+                        <li>
+                            <strong>Unit Tests: </strong> Testing of individual functions or classes by mocking input and making
+                            sure the output is as expected.</li>
+                        <li>
+                            <strong>Integration Test: </strong> Testing several modules to ensure they work together as expected.</li>
+                        <li>
+                            <strong>Functional Tests: </strong>Testing a scenario on the product itself (on the browser, for example)
+                            regardless of the internal structure to ensure expected behavior.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3> Example (Jasmine) - I </h3>
+                    <pre>
+                        <code class="language-javascript" data-trim contenteditable>
+                            const math = require('../src/math');
+
+                            describe("math module:", () => {
+                                describe("#sum", function(){
+                                    it("should be 0 when the array is empty", () => {
+                                        expect(math.sum([])).toBe(0);
+                                    });
+                                    it("should be x when the array contains an unique value x", function(){
+                                        const data = [
+                                            [[0], 0],
+                                            [[1], 1],
+                                            [[999], 999]
+                                        ];
+                                        data.forEach(function(test) {
+                                            expect(math.sum(test[0])).toBe(test[1]);
+                                        });
+                                    });
+                                });
+                            });
+                        </code>
+                    </pre>
+
+                </section>
+                <section>
+                    <h3> Example (Jasmine) - II </h3>
+                    <pre>
+                        <code class="language-javascript" data-trim contenteditable>
+                                    it("should be the sum of each element of the array", () => {
+                                        const data = [
+                                            [[1, 2], 3],
+                                            [[1, 2, 3], 6],
+                                            [[1, 2, 3, 4], 10]
+                                        ];
+                                        data.forEach(function(test) {
+                                            expect(math.sum(test[0])).toBe(test[1]);
+                                        });
+                                    });
+                                    describe("should return an exception", () => {
+                                        it("when the array is null", () => {});
+                                    })
+                                });
+                            });
+                        </code>
+                    </pre>
+
+                </section>
+            </section>
+
+
+            <section id="xp" data-background="images/fondos/fondo-xp.png">
+                <section>
+                    <div class="title">
+                        <div>
+                            <h2>eXtreme Programming: XP</h2>
+                        </div>
+                        <div>
+                            <img src="images/xp.svg" />
+                        </div>
+                    </div>
+                </section>
+
+                <section style="font-size:0.92em">
+                    <h3>eXtreme Programming: XP - Values</h3>
+                    <small>Extreme Programming Explained: Embrace Change (1999) - Kent Beck</small>
+                    <ul>
+                        <li>Assuming simplicity (YAGNI: "You aren't gonna need it")</li>
+                        <li>Feedback
+                            <ul>
+                                <li>Feedback from the system (unit tests or integration tests)</li>
+                                <li>Feedback from the customer (acceptance tests)</li>
+                                <li>Feedback from the team (requirements are estimated by them)</li>
+                            </ul>
+                        </li>
+                        <li>Courage (always design and code for today and not for tomorrow)</li>
+                        <li>Respect
+                            <ul>
+                                <li> Programmers should never commit changes that break compilation.</li>
+                                <li> Members respect their own work seeking for the best design for the solution. </li>
+                                <li>Nobody on the team should feel unappreciated or ignored. </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section style="font-size:0.92em">
+                    <h3>eXtreme Programming: XP - Practices</h3>
+                    <ol>
+                        <li>Pair programming</li>
+                        <li>Planning game </li>
+                        <li>Small releases</li>
+                        <li>Metaphor</li>
+                        <li>Simple design</li>
+                        <li>Testing</li>
+                        <li>Refactoring</li>
+                        <li>Collective ownership</li>
+                        <li>Continuos integration</li>
+                        <li>40-hour week</li>
+                        <li>On-site costumer</li>
+                        <li>Coding standards</li>
+
+                    </ol>
+                </section>
+            </section>
+
+
+
+
+
+            <!-- =================== END =================== -->
+            <section>
+                <h2>Thank You</h2>
+                <div class="columns">
+                    <div class="col">
+                        <div class="qrcode" align="center"></div>
+                        <div class="half-size">
+                            <a class="qrcode-link"></a>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img class="plain" src="images/heroes/heroes10.gif" width="100%" />
+
+                        <p>
+                            By
+                            <a title="Visit me on Github" href="https://github.com/ccaballerog">Carlos Caballero</a>
+                        </p>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- QR Codes -->
+    <script type="text/javascript">
+        // Get presentation URL
+        var qrcode_url = "https://github.com/caballerog/cleancodeJS";
+        if (!/^(localhost|127\.0\.1\.1|)$/.test(location.hostname)) {
+            // host is not localhost, get dynamic URL
+            //keep it simple
+            //qrcode_url = window.location.href;
+            console.log("host is not local, dynamic url: " + window.location.href);
+        }
+
+        // Generate QR Codes : class="qrcode"
+        var qrcode_elements = document.getElementsByClassName('qrcode');
+        for (var i = 0; i < qrcode_elements.length; i++) {
+            var qrcode_el = qrcode_elements[i];
+
+            var qrcode = new QRCode(qrcode_el, {
+                text: qrcode_url,
+                width: 350,
+                height: 350
+            });
+
+            // Alter generated image
+            var img_el = qrcode._el.childNodes[1];
+            img_el.classList.add("plain"); // remove border
+        }
+
+        // Add text to links : class="qrcode-link"
+        var qrcode_link_elements = document.getElementsByClassName('qrcode-link');
+        for (var i = 0; i < qrcode_link_elements.length; i++) {
+            var link_el = qrcode_link_elements[i];
+            link_el.textContent = qrcode_url;
+            link_el.href = qrcode_url;
+        }
+    </script>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+        // More info about config & dependencies:
+        // - https://github.com/hakimel/reveal.js#configuration
+        // - https://github.com/hakimel/reveal.js#dependencies
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            /*            width: 1280,
+                       height: 700, */
+            width: "100%",
+            height: "100%",
+            /*           width: "100%",
+                      height: "100%",
+                      margin: 0,
+                      minScale: 1,
+                      maxScale: 1, */
+            dependencies: [
+                { src: 'plugin/markdown/marked.js' },
+                { src: 'plugin/markdown/markdown.js' },
+                { src: 'plugin/notes/notes.js', async: true },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+            ]
+        });
+    </script>
+
+</body>
+
+</html>

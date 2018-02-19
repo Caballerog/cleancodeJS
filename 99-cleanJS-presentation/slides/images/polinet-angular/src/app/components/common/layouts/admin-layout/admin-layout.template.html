@@ -1,0 +1,104 @@
+<mat-sidenav-container class="app-side-nav-container mat-drawer-transition">
+    <section class="c-header">
+      <!-- Main side navigation -->
+      <!-- <mat-sidenav #sidenav [opened]="!isNavOver()" [mode]="isNavOver() ? 'over' : 'side'" class="sidebar-panel">
+      <div id="scroll-area" class="navigation-hold" fxLayout="column">
+  
+        <div class="branding default-bg">
+            <img src="assets/images/logo.png" alt="" class="app-logo">
+            <img
+            src="assets/images/logo-text-white.png"
+            alt=""
+            class="app-logo-text"
+            *ngIf="themeService.activatedThemeName.indexOf('dark') !== -1">
+            <img
+            src="assets/images/logo-text.png"
+            alt=""
+            class="app-logo-text"
+            *ngIf="themeService.activatedThemeName.indexOf('dark') === -1">
+        </div>
+  
+        <div class="app-user">
+          <div class="app-user-photo">
+            <img src="assets/images/face-7.jpg" alt="">
+          </div>
+          <span class="app-user-name mb-05">
+            <mat-icon class="icon-xs text-muted">lock</mat-icon>
+            Watson Joyce
+          </span>
+  
+          <div class="app-user-controls">
+            <button
+            class="text-muted"
+            mat-icon-button
+            mat-xs-button
+            [matMenuTriggerFor]="appUserMenu">
+              <mat-icon>settings</mat-icon>
+            </button>
+            <button
+            class="text-muted"
+            mat-icon-button
+            mat-xs-button
+            matTooltip="Inbox"
+            routerLink="/inbox">
+              <mat-icon>email</mat-icon>
+            </button>
+            <button
+            class="text-muted"
+            mat-icon-button
+            mat-xs-button
+            matTooltip="Sign Out"
+            routerLink="/sessions/signin">
+              <mat-icon>exit_to_app</mat-icon>
+            </button>
+            <mat-menu #appUserMenu="matMenu">
+                <button mat-menu-item routerLink="/profile/overview">
+                  <mat-icon>account_box</mat-icon>
+                  <span>Profile</span>
+                </button>
+                <button mat-menu-item routerLink="/profile/settings">
+                  <mat-icon>settings</mat-icon>
+                  <span>Account Settings</span>
+                </button>
+                <button mat-menu-item routerLink="/calendar">
+                  <mat-icon>date_range</mat-icon>
+                  <span>Calendar</span>
+                </button>
+                <button mat-menu-item routerLink="/sessions/signin">
+                  <mat-icon>exit_to_app</mat-icon>
+                  <span>Sign out</span>
+                </button>
+              </mat-menu>
+          </div>
+        </div>
+  
+        <navigation></navigation>
+      </div>
+    </mat-sidenav> -->
+  
+      <!-- Top Bar -->
+      <!-- Template reference variables of Left sidebar and Right notification is supplied -->
+      <!-- Listens language change event -->
+      <topbar [sidenav]="sidenav" [notificPanel]="notificationPanel" (onLangChange)="translate.use($event)"></topbar>
+      <app-breadcrumb #breadcrumb></app-breadcrumb>
+  
+      <!-- App content -->
+      <div class="rightside-content-hold">
+        <div class="view-loader" *ngIf="isModuleLoading">
+          <div class="spinner">
+            <div class="double-bounce1 mat-bg-accent"></div>
+            <div class="double-bounce2 mat-bg-primary"></div>
+          </div>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+      <!-- Notificaation bar -->
+      <!-- <mat-sidenav #notificationPanel mode="over" class="" align="end">
+        <div class="navigation-hold" fxLayout="column">
+          <app-notifications [notificPanel]="notificationPanel"></app-notifications>
+        </div>
+      </mat-sidenav> -->
+    </section>
+    <app-footer >
+    </app-footer>
+  </mat-sidenav-container>

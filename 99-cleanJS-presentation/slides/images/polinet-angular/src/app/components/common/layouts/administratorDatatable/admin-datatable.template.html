@@ -1,0 +1,12 @@
+<mat-sidenav-container class="app-side-nav-container mat-drawer-transition">
+  <section class="c-header">
+
+    <topbar [sidenav]="sidenav" [notificPanel]="notificationPanel" (onLangChange)="translate.use($event)"></topbar>
+    <app-breadcrumb #breadcrumb></app-breadcrumb>
+    <app-datatable></app-datatable>
+
+
+  </section>
+  <app-footer>
+  </app-footer>
+</mat-sidenav-container>

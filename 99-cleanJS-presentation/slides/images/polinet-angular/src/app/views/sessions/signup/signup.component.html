@@ -1,0 +1,86 @@
+<topbar></topbar>
+<section [ngStyle]="{ 'width': '80%', 'margin': '0 auto'} "  >
+  <form [formGroup]="signupForm " fxLayout="column" (ngSubmit)="submit(form)">
+    <h4 mat-dialog-title>Registro</h4>
+    
+    <mat-dialog-content fxLayout="column" fxLayoutAlign="space">
+    <div fxLayout="row" fxLayoutGap="2em">
+        <mat-form-field fxFlex="30">
+            <input matInput placeholder="Nick Usuario ">
+          </mat-form-field >
+          <mat-form-field fxFlex="30">
+              <mat-select placeholder="Grupo ">
+                <mat-option value="S11AW ">S11AW</mat-option>
+                <mat-option value="S21AW ">S21AW</mat-option>
+                <mat-option value="S11AR ">S11AR</mat-option>
+              </mat-select>
+            </mat-form-field>
+          
+    </div>
+    <div fxLayout="row"  fxLayoutGap="2em">
+        <mat-form-field fxFlex="30">
+            <input matInput placeholder="Nombre ">
+          </mat-form-field>
+  
+        <mat-form-field fxFlex="30">
+            <input matInput placeholder="Apellido ">
+          </mat-form-field>
+    </div>
+     
+    <div fxLayout="row"  fxLayoutGap="2em">
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="Escribe tu contraseña " [type]="hide ? 'password' : 'text' ">
+        <mat-icon class="show-pwd " matSuffix (click)="hide=! hide ">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="30" fxGrow="1">
+          <input matInput placeholder="Correo ">
+        </mat-form-field>
+    </div>
+        
+    </mat-dialog-content>
+    <mat-dialog-actions fxLayout="row">
+      <button fxOfsset="5em" fxFlex="20" fx mat-raised-button color="primary" type="button " fxLayoutAlign="center center ">Crear Cuenta</button>
+    </mat-dialog-actions>
+  </form>
+</section>
+<app-footer></app-footer>
+
+
+<!-- <form [formGroup]="signupForm" fxLayout="column" (ngSubmit)="submit(form)">
+  <h4 mat-dialog-title>Registro</h4>
+  <mat-dialog-content fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+    <div fxFlex="45%" fxLayout="column">
+      <mat-form-field>
+        <input matInput placeholder="Nick Usuario">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Escribe tu contraseña" [type]="hide ? 'password' : 'text'">
+        <mat-icon class="show-pwd" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Correo">
+      </mat-form-field>
+    </div>
+    <div fxFlex="45%" fxLayout="column">
+      <mat-form-field>
+        <input matInput placeholder="Nombre">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Apellido">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Grupo">
+          <mat-option value="S11AW">S11AW</mat-option>
+          <mat-option value="S21AW">S21AW</mat-option>
+          <mat-option value="S11AR">S11AR</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions fxLayout="column">
+    <button mat-button type="button" fxLayoutAlign="center center">Crear Cuenta</button>
+  </mat-dialog-actions>
+</form> -->

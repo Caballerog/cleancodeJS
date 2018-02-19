@@ -1,0 +1,12 @@
+.c-footer {
+  background: #3f51b5;
+  text-align: center;
+  color: #fff;
+  position:fixed;
+  bottom:0;
+  width:100%;
+}
+
+.c-footer .fab{
+  font-size: 40px;
+}

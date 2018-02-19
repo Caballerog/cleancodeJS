@@ -1,0 +1,12 @@
+.c-news .new .message {
+  white-space: normal !important;
+}
+
+.c-news .new {
+  padding: 15px 0px;
+  height: auto;
+}
+.c-news{
+  height: 400px;
+  overflow-y: scroll;
+}

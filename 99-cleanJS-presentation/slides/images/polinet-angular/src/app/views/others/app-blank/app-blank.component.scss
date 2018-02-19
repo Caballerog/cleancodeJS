@@ -1,0 +1,23 @@
+.mat-grid-list {
+    margin: 15px;
+}
+
+.mat-card {
+    margin: 15px;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
+ /*    overflow-y: scroll; */
+}
+
+.mat-card>:first-child {
+    margin-top: 15px;
+}
+
+.mat-card>:last-child {
+    margin-bottom: 15px;
+}
+
+.mat-grid-tile {
+    overflow: visible;
+}
